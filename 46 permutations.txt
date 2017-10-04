@@ -1,0 +1,35 @@
+Problem£º
+Given a collection of distinct numbers, return all possible permutations.
+Problem:
+Given a collection of distinct numbers, return all possible permutations.
+
+Solution:
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        doPermute(res, nums, 0);
+        return res;
+    }
+    
+private:
+    
+    void doPermute(vector<vector<int>>& res, vector<int>& nums, int pos){
+        if (nums.size() == pos) { 
+            res.push_back(nums);
+        }
+        else {
+            for (int i = pos; i < nums.size(); ++i) { 
+                swap(nums, i, pos);
+                doPermute(res, nums, pos+1);
+                swap(nums, i, pos);
+            }
+        }
+    }
+    
+    void swap(vector<int> & nums, int pos1, int pos2) {    
+        int tmp = nums[pos1];
+        nums[pos1] = nums[pos2];
+        nums[pos2]= tmp;
+    }
+};
